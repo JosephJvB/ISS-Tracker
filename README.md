@@ -2,7 +2,7 @@ HOW TO:
 
 ```npm i```
 
-and you are away laughing.
+and you are away laughing. In theory - reality is that at home my NODEJS ENVIRONMENT.TM is having issues :/
 
 This app is live at this address: https://wheres-my-iss.herokuapp.com/
 

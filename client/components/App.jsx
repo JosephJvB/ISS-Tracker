@@ -1,6 +1,7 @@
 import React from 'react'
 
-import {getLatLng, getPosition} from '../apiClient.js'
+import { addCoords } from './actions/coords'
+import { getLatLng, getPosition } from '../apiClient.js'
 
 export default class App extends React.Component {
   constructor (props) {
@@ -17,7 +18,12 @@ export default class App extends React.Component {
 
   refreshCoords () {
     getLatLng((err, data) => {
-      if (!err) this.setState({lat: data.latitude, lng: data.longitude, data})
+      if (!err) this.setState({
+        lat: data.latitude,
+        lng: data.longitude,
+        data
+      })
+      this.props.dispatch(addCoords(data.latitude, data.longitude))
       this.refreshPosition(data.latitude, data.longitude)
     })
   }
@@ -25,15 +31,19 @@ export default class App extends React.Component {
     // const {lat, lng} = this.state
     getPosition(lat, lng, (err, data) => {
       if (!err) {
-        const {timezone_id, map_url} = data
-        this.setState({location: timezone_id, map_url, errMessage: null})
+        const { timezone_id, map_url } = data
+        this.setState({
+          location: timezone_id,
+          map_url,
+          errMessage: null
+        })
       } else {
         this.setState({ errMessage: err.response.body.error })
       }
     })
   }
   render () {
-    const {lat, lng, location, errMessage, map_url} = this.state
+    const { lat, lng, location, errMessage, map_url } = this.state
     return (
       <div>
         <h1>International Space Station</h1>
@@ -46,3 +56,14 @@ export default class App extends React.Component {
     )
   }
 }
+
+// wont need this till polyline, only writing code to store coords not use them yet
+
+// const mapStateToProps = (state) => {
+//   return {
+//   coords: state.coords
+//   }
+// }
+
+// but i do want to connect so I can use dispatch ;)
+export default connect(mapStateToProps)()
