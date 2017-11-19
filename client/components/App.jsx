@@ -3,7 +3,7 @@ import React from 'react'
 import { addCoords } from './actions/coords'
 import { getLatLng, getPosition } from '../apiClient.js'
 
-export default class App extends React.Component {
+class App extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -18,11 +18,13 @@ export default class App extends React.Component {
 
   refreshCoords () {
     getLatLng((err, data) => {
-      if (!err) this.setState({
-        lat: data.latitude,
-        lng: data.longitude,
-        data
-      })
+      if (!err) {
+        this.setState({
+          lat: data.latitude,
+          lng: data.longitude,
+          data
+        })
+      }
       this.props.dispatch(addCoords(data.latitude, data.longitude))
       this.refreshPosition(data.latitude, data.longitude)
     })
@@ -59,11 +61,11 @@ export default class App extends React.Component {
 
 // wont need this till polyline, only writing code to store coords not use them yet
 
-// const mapStateToProps = (state) => {
-//   return {
-//   coords: state.coords
-//   }
-// }
+const mapStateToProps = (state) => {
+  return {
+    coords: state.coords
+  }
+}
 
 // but i do want to connect so I can use dispatch ;)
-export default connect(mapStateToProps)()
+export default connect(mapStateToProps)(App)

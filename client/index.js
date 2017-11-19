@@ -7,8 +7,8 @@ import store from './store'
 
 document.addEventListener('DOMContentLoaded', () => {
   ReactDOM.render(
-    <Provider store = {store}>
-    <App />
+    <Provider store={store}>
+      <App />
     </Provider>,
     document.getElementById('app')
   )
