@@ -4,6 +4,8 @@ import { connect } from 'react-redux'
 import { addCoords } from '../actions/coords'
 import { getLatLng, getPosition } from '../apiClient.js'
 
+const style = { height: '300px', width: '40%' }
+
 class App extends React.Component {
   constructor (props) {
     super(props)
@@ -15,6 +17,7 @@ class App extends React.Component {
       mapUrl: null,
       errMessage: null
     }
+    this.initMap = this.initMap.bind(this)
   }
 
   refreshCoords () {
@@ -26,6 +29,7 @@ class App extends React.Component {
           data
         })
       }
+      this.initMap(data.latitude, data.longitude)
       this.props.dispatch(addCoords(data.latitude, data.longitude))
       this.refreshPosition(data.latitude, data.longitude)
     })
@@ -44,6 +48,19 @@ class App extends React.Component {
       }
     })
   }
+
+  initMap(lat, lng) {
+    this.map = new window.google.maps.Map(this.refs.map, {
+      center: { lat, lng },
+      zoom: 2,
+      fullscreenControl: false
+    })
+    const iss = new google.maps.Marker({
+      position: { lat, lng },
+      map: this.map
+    })
+  }
+
   render () {
     const { lat, lng, location, errMessage, mapUrl } = this.state
     return (
@@ -54,6 +71,7 @@ class App extends React.Component {
         <h2>Lat: {lat} Lng: {lng}</h2>
         <h3>{location}</h3>
         <a href={mapUrl}>Show me the map</a>
+        <div className='map' ref='map' style={style}></div>
       </div>
     )
   }
