@@ -12,7 +12,7 @@ class App extends React.Component {
       lng: null,
       data: null,
       location: null,
-      map_url: null,
+      mapUrl: null,
       errMessage: null
     }
   }
@@ -31,13 +31,12 @@ class App extends React.Component {
     })
   }
   refreshPosition (lat, lng) {
-    // const {lat, lng} = this.state
     getPosition(lat, lng, (err, data) => {
       if (!err) {
-        const { timezone_id, map_url } = data
+        const { timezone_id, mapUrl } = data
         this.setState({
           location: timezone_id,
-          map_url,
+          mapUrl,
           errMessage: null
         })
       } else {
@@ -46,7 +45,7 @@ class App extends React.Component {
     })
   }
   render () {
-    const { lat, lng, location, errMessage, map_url } = this.state
+    const { lat, lng, location, errMessage, mapUrl } = this.state
     return (
       <div>
         <h1>International Space Station</h1>
@@ -54,7 +53,7 @@ class App extends React.Component {
         <button onClick={this.refreshCoords.bind(this)}>WHERE IS THE SATELITE</button>
         <h2>Lat: {lat} Lng: {lng}</h2>
         <h3>{location}</h3>
-        <a href={map_url}>Show me the map</a>
+        <a href={mapUrl}>Show me the map</a>
       </div>
     )
   }
