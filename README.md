@@ -1,12 +1,11 @@
-HOW TO:
+# Track satelites with API's!
 
-```npm i```
+This project uses webpack to transpile and bundle ES6 React code. To use, consider these steps:
 
-and you are away laughing. In theory - reality is that at home my NODEJS ENVIRONMENT.TM is having issues :/
+Fork this repo
+Rename your repo according to the app you're building
+`git clone https://github.com/[your-account]/[your-app].git `
+`cd [your-app] && npm install`
+To start the development server with a watcher that rebuilds your code, run npm run dev. The assets built by webpack are placed in server/public. This folder is defined as a static folder in an Express.js server that can be started with: `npm run dev`
 
-This app is live at this address: https://wheres-my-iss.herokuapp.com/
-
-
-Raj and Joe reckon it would be cool to enter the satellite Coords into a map API (Gmaps) to display the position of the satellite picture/marker on map.
-
---> STRETCH GOAL
+Additional components should be placed in client/components.
