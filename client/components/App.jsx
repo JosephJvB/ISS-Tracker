@@ -1,6 +1,7 @@
 import React from 'react'
+import { connect } from 'react-redux'
 
-import { addCoords } from './actions/coords'
+import { addCoords } from '../actions/coords'
 import { getLatLng, getPosition } from '../apiClient.js'
 
 class App extends React.Component {
@@ -61,11 +62,11 @@ class App extends React.Component {
 
 // wont need this till polyline, only writing code to store coords not use them yet
 
-const mapStateToProps = (state) => {
-  return {
-    coords: state.coords
-  }
-}
+// const mapStateToProps = (state) => {
+//   return {
+//     coords: state.coords
+//   }
+// }
 
 // but i do want to connect so I can use dispatch ;)
-export default connect(mapStateToProps)(App)
+export default connect()(App)
