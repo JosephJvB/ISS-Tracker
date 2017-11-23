@@ -19,12 +19,15 @@ function getCoords () {
       if (err) console.log(err)
       else {
         const coords = {lat: res.body.latitude, lng: res.body.longitude}
-        console.log('im coords', coords)
-        const gimme = allcoords.push(coords)
-        fs.writeFile(`${__dirname}/coords.txt`, gimme, (err) => {
-          if (err) console.log(err)
-          else setTimeout(getCoords, 2000)
-        })
+        // console.log('im coords', coords)
+        allcoords.push(coords)
+        console.log('im allcoords', allcoords)
+        if (allcoords.length === 20) {
+          fs.writeFile(`${__dirname}/coords.txt`, JSON.stringify(allcoords), (err) => {
+            if (err) console.log(err)
+            else console.log('all done my G')
+          })
+        } else { setTimeout(getCoords, 10000) }
       }
     })
 }
