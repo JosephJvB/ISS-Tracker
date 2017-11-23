@@ -4,6 +4,8 @@ import { connect } from 'react-redux'
 import { addCoords } from '../actions/coords'
 import { getLatLng, getPosition } from '../apiClient.js'
 
+import coordList from '../../server/scrape/coords.json'
+
 const style = { height: '300px', width: '40%' }
 
 class App extends React.Component {
@@ -19,6 +21,8 @@ class App extends React.Component {
     }
     this.initMap = this.initMap.bind(this)
   }
+
+  componentDidMount () { console.log(coordList) }
 
   refreshCoords () {
     getLatLng((err, data) => {

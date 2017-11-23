@@ -20,7 +20,7 @@ function getCoords (count) {
         allCoords.push(coords)
         // console.log('im allCoords', allCoords)
         if (allCoords.length === 6) {
-          fs.writeFile(`${__dirname}/coords.txt`, JSON.stringify(allCoords), (err) => {
+          fs.writeFile(`${__dirname}/coords.json`, JSON.stringify(allCoords), (err) => {
             if (err) console.log(err)
             else console.log('all done my G')
           })
