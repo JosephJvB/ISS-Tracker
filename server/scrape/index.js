@@ -10,20 +10,21 @@ function start () {
   getCoords()
 }
 
+const allcoords = []
+
 function getCoords () {
   request
     .get(issCoords)
     .end((err, res) => {
-      if (err) { console.log(err) }
-      const coords = {
-        lat: res.body.latitude,
-        lng: res.body.longitude
+      if (err) console.log(err)
+      else {
+        const coords = {lat: res.body.latitude, lng: res.body.longitude}
+        console.log('im coords', coords)
+        const gimme = allcoords.push(coords)
+        fs.writeFile(`${__dirname}/coords.txt`, gimme, (err) => {
+          if (err) console.log(err)
+          else setTimeout(getCoords, 2000)
+        })
       }
-      console.log('im coords', coords)
-      fs.writeFile(`${__dirname}/coords.txt`, coords, (err) => {
-        if (err) console.log(err)
-        else console.log('wrote em')
-      })
-      setTimeout(getCoords(), 3000)
     })
 }
