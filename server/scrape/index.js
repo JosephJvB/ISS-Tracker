@@ -4,30 +4,27 @@ const path = require('path')
 
 const issCoords = 'https://api.wheretheiss.at/v1/satellites/25544.'
 
-start()
+const allCoords = []
+const counter = 1
 
-function start () {
-  getCoords()
-}
+getCoords(counter)
 
-const allcoords = []
-
-function getCoords () {
+function getCoords (count) {
   request
     .get(issCoords)
     .end((err, res) => {
       if (err) console.log(err)
       else {
-        const coords = {lat: res.body.latitude, lng: res.body.longitude}
-        // console.log('im coords', coords)
-        allcoords.push(coords)
-        console.log('im allcoords', allcoords)
-        if (allcoords.length === 20) {
-          fs.writeFile(`${__dirname}/coords.txt`, JSON.stringify(allcoords), (err) => {
+        const coords = { lat: res.body.latitude, lng: res.body.longitude }
+        console.log('coords no', count, coords)
+        allCoords.push(coords)
+        // console.log('im allCoords', allCoords)
+        if (allCoords.length === 6) {
+          fs.writeFile(`${__dirname}/coords.txt`, JSON.stringify(allCoords), (err) => {
             if (err) console.log(err)
             else console.log('all done my G')
           })
-        } else { setTimeout(getCoords, 10000) }
+        } else { setTimeout(() => getCoords(count + 1), 1000) }
       }
     })
 }
