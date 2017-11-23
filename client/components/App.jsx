@@ -49,7 +49,7 @@ class App extends React.Component {
     })
   }
 
-  initMap(lat, lng) {
+  initMap (lat, lng) {
     this.map = new window.google.maps.Map(this.refs.map, {
       center: { lat, lng },
       zoom: 2,
