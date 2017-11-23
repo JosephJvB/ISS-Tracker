@@ -1,7 +1,7 @@
 import request from 'superagent'
 
-const issUrl = "https://api.wheretheiss.at/v1/satellites/25544."
-const positionUrl =" https://api.wheretheiss.at/v1/coordinates/"
+const coordsUrl = 'https://api.wheretheiss.at/v1/satellites/25544.'
+const positionUrl = 'https://api.wheretheiss.at/v1/coordinates/'
 
 export function getPosition (lat, lng, callback) {
   request
@@ -17,7 +17,7 @@ export function getPosition (lat, lng, callback) {
 
 export function getLatLng (callback) {
   request
-    .get(issUrl)
+    .get(coordsUrl)
     .end((err, res) => {
       if (err) {
         callback(err)
