@@ -20,11 +20,11 @@ function getCoords (count) {
         allCoords.push(coords)
         // console.log('im allCoords', allCoords)
         if (allCoords.length === 69) {
-          fs.writeFile(`${__dirname}/coords.json`, JSON.stringify(allCoords), (err) => {
+          fs.writeFile(`${__dirname}/rekt.json`, JSON.stringify(allCoords), (err) => {
             if (err) console.log(err)
             else console.log('all done my G')
           })
-        } else { setTimeout(() => getCoords(count + 1), 1000) }
+        } else { setTimeout(() => getCoords(count + 1), 5000) }
       }
     })
 }

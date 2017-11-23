@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { addCoords } from '../actions/coords'
 import { getLatLng, getPosition } from '../apiClient.js'
 
-import coordList from '../../server/scrape/coords.json'
+import coordList from '../../server/coordLog/rekt.json'
 
 const style = { height: '300px', width: '40%' }
 
