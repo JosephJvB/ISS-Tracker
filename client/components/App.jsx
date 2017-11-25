@@ -37,11 +37,12 @@ class App extends React.Component {
 
   renderLine () {
     const { coords } = this.props
-    const { lat, lng } = coords[0]
-    const iss = new google.maps.Marker({
+    const { lat, lng } = coords[coords.length - 1]
+    if (this.iss) this.iss.setMap(null)
+    this.iss = new google.maps.Marker({
       position: { lat, lng }
     })
-    iss.setMap(this.map)
+    this.iss.setMap(this.map)
 
     const line = new google.maps.Polyline({
       path: coords,
