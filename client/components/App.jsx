@@ -1,12 +1,11 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import { addCoords } from '../actions/coords'
+import { addCoords, tickCoords } from '../actions/coords'
 import { getLatLng, getPosition } from '../apiClient.js'
 
-// import coordList from '../../server/coordLog/rekt.json'
-
 const style = { height: '300px', width: '40%' }
+const coordCount = 1
 
 class App extends React.Component {
   constructor (props) {
@@ -22,7 +21,11 @@ class App extends React.Component {
     this.initMap = this.initMap.bind(this)
   }
 
-  // componentDidMount () { console.log(coordList) }
+  componentDidMount () { this.props.dispatch(tickCoords(coordCount)) }
+
+  componentDidUpdate () {
+    console.log(this.props.coords)
+  }
 
   refreshCoords () {
     getLatLng((err, data) => {
@@ -83,11 +86,11 @@ class App extends React.Component {
 
 // wont need this till polyline, only writing code to store coords not use them yet
 
-// const mapStateToProps = (state) => {
-//   return {
-//     coords: state.coords
-//   }
-// }
+const mapStateToProps = (state) => {
+  return {
+    coords: state.coords
+  }
+}
 
 // but i do want to connect so I can use dispatch ;)
-export default connect()(App)
+export default connect(mapStateToProps)(App)
