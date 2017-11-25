@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import { addCoords, tickCoords } from '../actions/coords'
+import { addCoords, getCoords } from '../actions/coords'
 import { getLatLng, getPosition } from '../apiClient.js'
 
 const style = { height: '300px', width: '40%' }
@@ -19,12 +19,18 @@ class App extends React.Component {
       errMessage: null
     }
     this.initMap = this.initMap.bind(this)
+    this.tickTock = this.tickTock.bind(this)
   }
 
-  componentDidMount () { this.props.dispatch(tickCoords(coordCount)) }
+  componentDidMount () { this.tickTock(coordCount) }
+
+  tickTock (count) {
+    this.props.dispatch(getCoords())
+    setTimeout(() => this.tickTock(count + 1), 2000)
+  }
 
   componentDidUpdate () {
-    console.log(this.props.coords)
+    console.log('next coords', this.props.coords)
   }
 
   refreshCoords () {

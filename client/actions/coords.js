@@ -1,7 +1,7 @@
 import { getLatLng } from '../apiClient'
 
 export const ADD_COORDS = 'ADD_COORDS'
-export const TICK_COORDS = 'TICK_COORDS'
+export const GET_COORDS = 'GET_COORDS'
 
 export const addCoords = (lat, lng) => {
   return {
@@ -10,7 +10,7 @@ export const addCoords = (lat, lng) => {
   }
 }
 
-export const tickCoords = (count) => {
+export const getCoords = () => {
   return (dispatch) => {
     getLatLng((err, res) => {
       if (err) console.log(err)
