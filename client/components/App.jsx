@@ -1,12 +1,11 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import { addCoords } from '../actions/coords'
+import { addCoords, getCoords } from '../actions/coords'
 import { getLatLng, getPosition } from '../apiClient.js'
 
-// import coordList from '../../server/coordLog/rekt.json'
-
 const style = { height: '300px', width: '40%' }
+const coordCount = 1
 
 class App extends React.Component {
   constructor (props) {
@@ -20,9 +19,49 @@ class App extends React.Component {
       errMessage: null
     }
     this.initMap = this.initMap.bind(this)
+    this.tickTock = this.tickTock.bind(this)
+    this.renderLine = this.renderLine.bind(this)
   }
 
-  // componentDidMount () { console.log(coordList) }
+  componentDidMount () { this.tickTock(coordCount); setTimeout(this.initMap, 1000) }
+
+  tickTock (count) {
+    this.props.dispatch(getCoords())
+    setTimeout(() => this.tickTock(count + 1), 2000)
+  }
+
+  componentDidUpdate () {
+    console.log('next coords', this.props.coords)
+    this.renderLine()
+  }
+
+  renderLine () {
+    const { coords } = this.props
+    const { lat, lng } = coords[coords.length - 1]
+    if (this.iss) this.iss.setMap(null)
+    this.iss = new google.maps.Marker({
+      position: { lat, lng }
+    })
+    this.iss.setMap(this.map)
+
+    const line = new google.maps.Polyline({
+      path: coords,
+      geodesic: true,
+      strokeColor: '#FF0000',
+      strokeOpacity: 1.0,
+      strokeWeight: 2
+    })
+    line.setMap(this.map)
+  }
+
+  initMap () {
+    const { lat, lng } = this.props.coords[0]
+    this.map = new window.google.maps.Map(this.refs.map, {
+      center: { lat, lng },
+      zoom: 2,
+      fullscreenControl: false
+    })
+  }
 
   refreshCoords () {
     getLatLng((err, data) => {
@@ -53,18 +92,6 @@ class App extends React.Component {
     })
   }
 
-  initMap (lat, lng) {
-    this.map = new window.google.maps.Map(this.refs.map, {
-      center: { lat, lng },
-      zoom: 2,
-      fullscreenControl: false
-    })
-    const iss = new google.maps.Marker({
-      position: { lat, lng },
-      map: this.map
-    })
-  }
-
   render () {
     const { lat, lng, location, errMessage, mapUrl } = this.state
     return (
@@ -83,11 +110,11 @@ class App extends React.Component {
 
 // wont need this till polyline, only writing code to store coords not use them yet
 
-// const mapStateToProps = (state) => {
-//   return {
-//     coords: state.coords
-//   }
-// }
+const mapStateToProps = (state) => {
+  return {
+    coords: state.coords
+  }
+}
 
 // but i do want to connect so I can use dispatch ;)
-export default connect()(App)
+export default connect(mapStateToProps)(App)
