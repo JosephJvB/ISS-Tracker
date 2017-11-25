@@ -20,9 +20,10 @@ class App extends React.Component {
     }
     this.initMap = this.initMap.bind(this)
     this.tickTock = this.tickTock.bind(this)
+    this.renderLine = this.renderLine.bind(this)
   }
 
-  componentDidMount () { this.tickTock(coordCount) }
+  componentDidMount () { this.tickTock(coordCount); setTimeout(this.initMap, 1000) }
 
   tickTock (count) {
     this.props.dispatch(getCoords())
@@ -31,6 +32,34 @@ class App extends React.Component {
 
   componentDidUpdate () {
     console.log('next coords', this.props.coords)
+    this.renderLine()
+  }
+
+  renderLine () {
+    const { coords } = this.props
+    const { lat, lng } = coords[0]
+    const iss = new google.maps.Marker({
+      position: { lat, lng }
+    })
+    iss.setMap(this.map)
+
+    const line = new google.maps.Polyline({
+      path: coords,
+      geodesic: true,
+      strokeColor: '#FF0000',
+      strokeOpacity: 1.0,
+      strokeWeight: 2
+    })
+    line.setMap(this.map)
+  }
+
+  initMap () {
+    const { lat, lng } = this.props.coords[0]
+    this.map = new window.google.maps.Map(this.refs.map, {
+      center: { lat, lng },
+      zoom: 2,
+      fullscreenControl: false
+    })
   }
 
   refreshCoords () {
@@ -59,18 +88,6 @@ class App extends React.Component {
       } else {
         this.setState({ errMessage: err.response.body.error })
       }
-    })
-  }
-
-  initMap (lat, lng) {
-    this.map = new window.google.maps.Map(this.refs.map, {
-      center: { lat, lng },
-      zoom: 2,
-      fullscreenControl: false
-    })
-    const iss = new google.maps.Marker({
-      position: { lat, lng },
-      map: this.map
     })
   }
 
