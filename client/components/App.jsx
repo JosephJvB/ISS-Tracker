@@ -23,7 +23,7 @@ class App extends React.Component {
     this.renderLine = this.renderLine.bind(this)
   }
 
-  componentDidMount () { this.tickTock(coordCount); setTimeout(this.initMap, 1000) }
+  componentDidMount () { this.tickTock(coordCount); setTimeout(this.initMap, 500) }
 
   tickTock (count) {
     this.props.dispatch(getCoords())
