@@ -39,7 +39,7 @@ class App extends React.Component {
   renderLine () {
     const { coords } = this.props
     const { lat, lng } = coords[coords.length - 1]
-    const colour = lat < 20 && lat > -20 ? lat < 40 && lat > -40 ? 'FF0000' : 'ffa700' : 'yellow'
+    // const colour = coords.length % 3 === 0 ? coords.length % 2 === 0 ? 'green' : 'red' : 'yellow'
     // percent > 33 ? percent > 66 ? "is-success" : "is-warning" : "is-danger"
     if (this.iss) this.iss.setMap(null)
     this.iss = new google.maps.Marker({
@@ -50,7 +50,7 @@ class App extends React.Component {
     const line = new google.maps.Polyline({
       path: coords,
       geodesic: true,
-      strokeColor: colour,
+      strokeColor: 'red',
       strokeOpacity: 1.0,
       strokeWeight: 2
     })
@@ -112,7 +112,7 @@ class App extends React.Component {
         <div className="columns">
           <div className="column is-1"></div>
           <div className='map' ref='map' style={style}></div>
-          <div className="column">
+          <div className="column card">
             <button className="button" onClick={this.refreshCoords}>MORE INFO:</button>
             <ul className="has-text-left">
               <li><h2>Lat: {lat}</h2></li>
@@ -121,6 +121,7 @@ class App extends React.Component {
               <li><h3>{location}</h3></li>
             </ul>
           </div>
+          <div className="column is-1"></div>
         </div>
       </section>
     )
