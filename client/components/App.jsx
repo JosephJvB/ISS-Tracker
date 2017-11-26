@@ -39,7 +39,7 @@ class App extends React.Component {
   renderLine () {
     const { coords } = this.props
     const { lat, lng } = coords[coords.length - 1]
-    const colour = lat < 25 && lat > -25 ? lat < 50 && lat > -50 ? 'yellow' : 'orange' : '#FF0000'
+    const colour = lat < 20 && lat > -20 ? lat < 40 && lat > -40 ? 'FF0000' : 'ffa700' : 'yellow'
     // percent > 33 ? percent > 66 ? "is-success" : "is-warning" : "is-danger"
     if (this.iss) this.iss.setMap(null)
     this.iss = new google.maps.Marker({
