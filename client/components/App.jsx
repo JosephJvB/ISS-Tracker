@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { addCoords, getCoords } from '../actions/coords'
 import { getLatLng, getPosition } from '../apiClient.js'
 
-const style = { height: '300px', width: '40%' }
+const style = { height: '400px', width: '60%' }
 const coordCount = 1
 
 class App extends React.Component {
@@ -15,12 +15,12 @@ class App extends React.Component {
       lng: null,
       data: null,
       location: null,
-      mapUrl: null,
       errMessage: null
     }
     this.initMap = this.initMap.bind(this)
     this.tickTock = this.tickTock.bind(this)
     this.renderLine = this.renderLine.bind(this)
+    this.zoomIn = this.zoomIn.bind(this)
   }
 
   componentDidMount () { this.tickTock(coordCount); setTimeout(this.initMap, 500) }
@@ -31,7 +31,7 @@ class App extends React.Component {
   }
 
   componentDidUpdate () {
-    console.log('next coords', this.props.coords)
+    console.log('coord no. ', this.props.coords.length)
     this.renderLine()
   }
 
@@ -49,7 +49,7 @@ class App extends React.Component {
       geodesic: true,
       strokeColor: '#FF0000',
       strokeOpacity: 1.0,
-      strokeWeight: 2
+      strokeWeight: 1.5
     })
     line.setMap(this.map)
   }
@@ -61,6 +61,11 @@ class App extends React.Component {
       zoom: 2,
       fullscreenControl: false
     })
+  }
+
+  zoomIn () {
+    this.map.setZoom(7)
+    this.map.setCenter(this.iss.getPosition())
   }
 
   refreshCoords () {
@@ -80,30 +85,35 @@ class App extends React.Component {
   refreshPosition (lat, lng) {
     getPosition(lat, lng, (err, data) => {
       if (!err) {
-        const { timezone_id, mapUrl } = data
+        const { timezone_id } = data
         this.setState({
           location: timezone_id,
-          mapUrl,
           errMessage: null
         })
       } else {
-        this.setState({ errMessage: err.response.body.error })
+        this.setState({ errMessage: 'Location not specified. (only coordinates on land are supported)' })
       }
     })
   }
 
   render () {
-    const { lat, lng, location, errMessage, mapUrl } = this.state
+    const { lat, lng, location, errMessage } = this.state
+    const buffer = { height: '40px' }
     return (
-      <div>
-        <h1>International Space Station</h1>
-        <h1>{errMessage}</h1>
-        <button onClick={this.refreshCoords.bind(this)}>WHERE IS THE SATELITE</button>
+      <section className="section has-text-centered">
+        <h1 className="title is-1">ISS Tracker</h1>
+        <hr />
+        <button className="button" onClick={this.refreshCoords.bind(this)}>WHERE IS THE SATELITE</button>
         <h2>Lat: {lat} Lng: {lng}</h2>
+        <h3>{errMessage}</h3>
         <h3>{location}</h3>
-        <a href={mapUrl}>Show me the map</a>
-        <div className='map' ref='map' style={style}></div>
-      </div>
+        <div className ="columns" style={buffer}></div>
+        <div className="columns">
+          <div className="column"></div>
+          <div className='map' ref='map' style={style}></div>
+          <div className="column"></div>
+        </div>
+      </section>
     )
   }
 }
