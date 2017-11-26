@@ -23,7 +23,7 @@ class App extends React.Component {
     this.zoomIn = this.zoomIn.bind(this)
   }
 
-  componentDidMount () { this.tickTock(coordCount); setTimeout(this.initMap, 500) }
+  componentDidMount () { this.tickTock(coordCount); this.initMap() }
 
   tickTock (count) {
     this.props.dispatch(getCoords())
@@ -31,7 +31,7 @@ class App extends React.Component {
   }
 
   componentDidUpdate () {
-    console.log('coord no. ', this.props.coords.length)
+    // console.log('coord no. ', this.props.coords.length)
     this.renderLine()
   }
 
@@ -55,6 +55,8 @@ class App extends React.Component {
   }
 
   initMap () {
+    console.log('lol')
+    if (!this.props.coords[0]) return setTimeout(this.initMap, 50)
     const { lat, lng } = this.props.coords[0]
     this.map = new window.google.maps.Map(this.refs.map, {
       center: { lat, lng },
@@ -118,13 +120,10 @@ class App extends React.Component {
   }
 }
 
-// wont need this till polyline, only writing code to store coords not use them yet
-
 const mapStateToProps = (state) => {
   return {
     coords: state.coords
   }
 }
 
-// but i do want to connect so I can use dispatch ;)
 export default connect(mapStateToProps)(App)
