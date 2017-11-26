@@ -21,6 +21,7 @@ class App extends React.Component {
     this.tickTock = this.tickTock.bind(this)
     this.renderLine = this.renderLine.bind(this)
     this.zoomIn = this.zoomIn.bind(this)
+    this.refreshCoords = this.refreshCoords.bind(this)
   }
 
   componentDidMount () { this.tickTock(coordCount); this.initMap() }
@@ -38,6 +39,8 @@ class App extends React.Component {
   renderLine () {
     const { coords } = this.props
     const { lat, lng } = coords[coords.length - 1]
+    const colour = lat < 25 && lat > -25 ? lat < 50 && lat > -50 ? 'yellow' : 'orange' : '#FF0000'
+    // percent > 33 ? percent > 66 ? "is-success" : "is-warning" : "is-danger"
     if (this.iss) this.iss.setMap(null)
     this.iss = new google.maps.Marker({
       position: { lat, lng }
@@ -47,9 +50,9 @@ class App extends React.Component {
     const line = new google.maps.Polyline({
       path: coords,
       geodesic: true,
-      strokeColor: '#FF0000',
+      strokeColor: colour,
       strokeOpacity: 1.0,
-      strokeWeight: 1.5
+      strokeWeight: 2
     })
     line.setMap(this.map)
   }
