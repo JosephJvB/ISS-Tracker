@@ -105,15 +105,19 @@ class App extends React.Component {
       <section className="section has-text-centered">
         <h1 className="title is-1">ISS Tracker</h1>
         <hr />
-        <button className="button" onClick={this.refreshCoords.bind(this)}>WHERE IS THE SATELITE</button>
-        <h2>Lat: {lat} Lng: {lng}</h2>
-        <h3>{errMessage}</h3>
-        <h3>{location}</h3>
-        <div className ="columns" style={buffer}></div>
+        <div className="columns" style={buffer}></div>
         <div className="columns">
-          <div className="column"></div>
+          <div className="column is-1"></div>
           <div className='map' ref='map' style={style}></div>
-          <div className="column"></div>
+          <div className="column">
+            <button className="button" onClick={this.refreshCoords}>MORE INFO:</button>
+            <ul className="has-text-left">
+              <li><h2>Lat: {lat}</h2></li>
+              <li><h2>Lng: {lng}</h2></li>
+              <li><h3>{errMessage}</h3></li>
+              <li><h3>{location}</h3></li>
+            </ul>
+          </div>
         </div>
       </section>
     )
