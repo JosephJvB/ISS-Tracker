@@ -4,7 +4,7 @@
   "description": "A webpack React starter",
   "repository": "https://github.com/dev-academy-challenges/boilerplate-react-webpack.git",
   "main": "server/index.js",
-  "scripts": {
+  "scripts": { 
     "reqs": "node server/coordLog/index.js",        
     "start": "webpack && node server",
     "dev": "nodemon --watch server & webpack --watch",

@@ -26,3 +26,15 @@ export function getLatLng (callback) {
       }
     })
 }
+
+export function getPic (city, callback) {
+  request
+    .get(`/api/v1/picScrape/${city}`)
+    .end((err, res) => {
+      if (err) {
+        callback(err)
+      } else {
+        callback(null, res.body)
+      }
+    })
+}

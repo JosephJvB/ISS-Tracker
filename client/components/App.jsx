@@ -1,7 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import { addCoords, getCoords } from '../actions/coords'
+import { getCoords } from '../actions/coords'
+import { gimmePic } from '../actions/pic'
 import { getLatLng, getPosition } from '../apiClient.js'
 
 const style = { height: '400px', width: '60%' }
@@ -82,8 +83,6 @@ class App extends React.Component {
           data
         })
       }
-      this.initMap(data.latitude, data.longitude)
-      this.props.dispatch(addCoords(data.latitude, data.longitude))
       this.refreshPosition(data.latitude, data.longitude)
     })
   }
@@ -95,6 +94,7 @@ class App extends React.Component {
           location: timezone_id,
           errMessage: null
         })
+        this.props.dispatch(gimmePic(timezone_id))
       } else {
         this.setState({ errMessage: 'Location not specified. (only coordinates on land are supported)' })
       }
