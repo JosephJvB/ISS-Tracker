@@ -16,7 +16,8 @@ class App extends React.Component {
       lng: null,
       data: null,
       location: null,
-      errMessage: null
+      errMessage: null,
+      pic: null
     }
     this.initMap = this.initMap.bind(this)
     this.tickTock = this.tickTock.bind(this)
@@ -96,13 +97,13 @@ class App extends React.Component {
         })
         this.props.dispatch(gimmePic(timezone_id))
       } else {
-        this.setState({ errMessage: 'Location not specified. (only coordinates on land are supported)' })
+        this.setState({ errMessage: 'Location not specified. (only coordinates on land are supported)', pic: '/images/dopefish_lives.gif' })
       }
     })
   }
 
   render () {
-    const { lat, lng, location, errMessage } = this.state
+    const { lat, lng, location, errMessage, pic } = this.state
     const buffer = { height: '40px' }
     return (
       <section className="section has-text-centered">
@@ -120,6 +121,7 @@ class App extends React.Component {
               <li><h3>{errMessage}</h3></li>
               <li><h3>{location}</h3></li>
             </ul>
+            <img src={pic} />
           </div>
           <div className="column is-1"></div>
         </div>

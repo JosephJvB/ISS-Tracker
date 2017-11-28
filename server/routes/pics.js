@@ -13,3 +13,5 @@ router.get('/picScrape/:city', (req, res) => {
       res.send(picSrc)
     })
 })
+
+module.exports = router
