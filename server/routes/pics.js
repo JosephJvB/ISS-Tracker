@@ -9,7 +9,7 @@ router.use(bodyParser.json())
 
 router.get('/picScrape/:city', (req, res) => {
   puppet.scrapePic(req.params.city)
-    .then(pic => {
-      res.send(pic)
+    .then(picSrc => {
+      res.send(picSrc)
     })
 })

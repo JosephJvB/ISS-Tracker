@@ -34,6 +34,7 @@ export function getPic (city, callback) {
       if (err) {
         callback(err)
       } else {
+        console.log(res)
         callback(null, res.body)
       }
     })
