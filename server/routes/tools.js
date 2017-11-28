@@ -1,7 +1,6 @@
 function transform (city) {
-  const newCity = city.split('/')[1]
-  if (newCity === 'New_York') { return 'New_York_City' }
-  return newCity
+  if (city === 'New_York') { return 'New_York_City' }
+  return city
 }
 
 module.exports = { transform }

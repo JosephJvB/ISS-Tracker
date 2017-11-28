@@ -121,7 +121,7 @@ class App extends React.Component {
               <li><h3>{errMessage}</h3></li>
               <li><h3>{location}</h3></li>
             </ul>
-            <img src={pic || this.props.pic} />
+            <img src={this.props.pic.url || pic} />
           </div>
           <div className="column is-1"></div>
         </div>
