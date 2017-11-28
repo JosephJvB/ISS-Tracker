@@ -121,7 +121,7 @@ class App extends React.Component {
               <li><h3>{errMessage}</h3></li>
               <li><h3>{location}</h3></li>
             </ul>
-            <img src={pic} />
+            <img src={pic || this.props.pic} />
           </div>
           <div className="column is-1"></div>
         </div>
@@ -132,7 +132,8 @@ class App extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    coords: state.coords
+    coords: state.coords,
+    pic: state.pic
   }
 }
 
