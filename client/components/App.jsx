@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 import { getCoords } from '../actions/coords'
-import { gimmePic } from '../actions/pic'
+import { gimmePic, addPic } from '../actions/pic'
 import { getLatLng, getPosition } from '../apiClient.js'
 
 const style = { height: '400px', width: '60%' }
@@ -97,7 +97,8 @@ class App extends React.Component {
         })
         this.props.dispatch(gimmePic(timezone_id))
       } else {
-        this.setState({ errMessage: 'Location not specified. (only coordinates on land are supported)', pic: '/images/dopefish_lives.gif' })
+        this.props.dispatch(addPic('/images/dopefish_lives.gif'))
+        this.setState({ errMessage: 'Location not specified. (only coordinates on land are supported)' })
       }
     })
   }
@@ -121,7 +122,7 @@ class App extends React.Component {
               <li><h3>{errMessage}</h3></li>
               <li><h3>{location}</h3></li>
             </ul>
-            <img src={this.props.pic.url || pic} />
+            <img src={ this.props.pic.src } />
           </div>
           <div className="column is-1"></div>
         </div>

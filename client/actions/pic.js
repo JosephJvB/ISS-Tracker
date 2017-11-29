@@ -2,10 +2,10 @@ import { getPic } from '../apiClient'
 
 export const ADD_PIC = 'ADD_PIC'
 
-const addPic = (picUrl) => {
+export const addPic = (src) => {
   return {
     type: ADD_PIC,
-    picUrl
+    src
   }
 }
 
