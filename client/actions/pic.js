@@ -13,7 +13,7 @@ export const gimmePic = (city) => {
   return (dispatch) => {
     getPic(city, (err, res) => {
       if (err) console.log(err)
-      else console.log(res); dispatch(addPic(res.pic)) // need to figure out what res.pic should be
+      else dispatch(addPic(res.picSrc)) // need to figure out what res.pic should be
     })
   }
 }

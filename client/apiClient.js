@@ -32,9 +32,10 @@ export function getPic (city, callback) {
     .get(`/api/v1/picScrape/${city}`)
     .end((err, res) => {
       if (err) {
+        console.log('oops')
         callback(err)
       } else {
-        console.log(res)
+        console.log('yay', res)
         callback(null, res.body)
       }
     })

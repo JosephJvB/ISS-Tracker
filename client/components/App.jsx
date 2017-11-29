@@ -16,8 +16,7 @@ class App extends React.Component {
       lng: null,
       data: null,
       location: null,
-      errMessage: null,
-      pic: null
+      errMessage: null
     }
     this.initMap = this.initMap.bind(this)
     this.tickTock = this.tickTock.bind(this)
@@ -84,7 +83,7 @@ class App extends React.Component {
           data
         })
       }
-      this.refreshPosition(data.latitude, data.longitude)
+      this.refreshPosition(14.692778, -17.446667)
     })
   }
   refreshPosition (lat, lng) {
@@ -104,7 +103,7 @@ class App extends React.Component {
   }
 
   render () {
-    const { lat, lng, location, errMessage, pic } = this.state
+    const { lat, lng, location, errMessage } = this.state
     const buffer = { height: '40px' }
     return (
       <section className="section has-text-centered">
