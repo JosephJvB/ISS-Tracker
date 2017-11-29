@@ -16,7 +16,8 @@ class App extends React.Component {
       lng: null,
       data: null,
       location: null,
-      errMessage: null
+      errMessage: null,
+      picExists: false
     }
     this.initMap = this.initMap.bind(this)
     this.tickTock = this.tickTock.bind(this)
@@ -83,7 +84,7 @@ class App extends React.Component {
           data
         })
       }
-      this.refreshPosition(14.692778, -17.446667)
+      this.refreshPosition(data.latitude, data.longitude)
     })
   }
   refreshPosition (lat, lng) {
@@ -95,6 +96,7 @@ class App extends React.Component {
           errMessage: null
         })
         this.props.dispatch(gimmePic(timezone_id))
+        this.setState({picExists: true})
       } else {
         this.props.dispatch(addPic('/images/dopefish_lives.gif'))
         this.setState({ errMessage: 'Location not specified. (only coordinates on land are supported)' })
@@ -103,7 +105,7 @@ class App extends React.Component {
   }
 
   render () {
-    const { lat, lng, location, errMessage } = this.state
+    const { lat, lng, location, errMessage, picExists } = this.state
     const buffer = { height: '40px' }
     return (
       <section className="section has-text-centered">
@@ -121,7 +123,8 @@ class App extends React.Component {
               <li><h3>{errMessage}</h3></li>
               <li><h3>{location}</h3></li>
             </ul>
-            <img src={ this.props.pic } />
+            {picExists && <img src={`https://${this.props.pic}`} />}
+            {!picExists && <img src={this.props.pic} />}
           </div>
           <div className="column is-1"></div>
         </div>
