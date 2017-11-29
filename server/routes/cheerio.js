@@ -10,7 +10,9 @@ export function cheeriScrape (city) {
     .end((err, res) => {
       if (err) console.log(err)
       const $ = cheerio.load(res.text)
-      let picSrc = $('a.image img')
+      let picSrc = $('a.image')
     })
   // ('a.image img').attr('src')
 }
+
+// got distracted by completing the puppetScraper :DDDDD
