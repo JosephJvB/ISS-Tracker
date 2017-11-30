@@ -81,7 +81,8 @@ class App extends React.Component {
         this.setState({
           lat: data.latitude,
           lng: data.longitude,
-          data
+          data,
+          picExists: false
         })
       }
       this.refreshPosition(data.latitude, data.longitude)
@@ -99,7 +100,11 @@ class App extends React.Component {
         this.setState({picExists: true})
       } else {
         this.props.dispatch(addPic('/images/dopefish_lives.gif'))
-        this.setState({ errMessage: 'Location not specified. (only coordinates on land are supported)' })
+        this.setState({
+          errMessage: 'Location not specified. (only coordinates on land are supported)',
+          location: null,
+          picExists: false
+        })
       }
     })
   }
