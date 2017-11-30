@@ -19,7 +19,7 @@ function getCoords (count) {
         console.log('coords no.', count, coords)
         allCoords.push(coords)
         // console.log('im allCoords', allCoords)
-        if (allCoords.length === 200) {
+        if (allCoords.length === 2000) {
           fs.writeFile(`${__dirname}/rekt.json`, JSON.stringify(allCoords), (err) => {
             if (err) console.log(err)
             else console.log('all done my G')
