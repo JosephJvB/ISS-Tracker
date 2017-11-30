@@ -84,7 +84,7 @@ class App extends React.Component {
           data
         })
       }
-      this.refreshPosition(data.latitude, data.longitude)
+      this.refreshPosition(-41.288889, 174.777222)
     })
   }
   refreshPosition (lat, lng) {
@@ -123,7 +123,7 @@ class App extends React.Component {
               <li><h3>{errMessage}</h3></li>
               <li><h3>{location}</h3></li>
             </ul>
-            {picExists && <img src={`https://${this.props.pic}`} />}
+            {picExists && <a href={`https://en.wikipedia.org/wiki/${location.split('/')[1]}`}> <img src={`https://${this.props.pic}`} /> </a>}
             {!picExists && <img src={this.props.pic} />}
           </div>
           <div className="column is-1"></div>
