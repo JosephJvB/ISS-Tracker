@@ -16,6 +16,3 @@ To start the development server with a watcher that rebuilds your code, run npm 
 
 
 Additional components should be placed in client/components.
-
-
-> I have added a script that makes multiple requests to the ISS API. Once it has receieved 69 coordinates it writes the coords to a JSON file. To run the script use the command: `npm run reqs`.
