@@ -16,10 +16,10 @@ function getCoords (count) {
       if (err) console.log(err)
       else {
         const coords = { lat: res.body.latitude, lng: res.body.longitude }
-        console.log('coords no', count, coords)
+        console.log('coords no.', count, coords)
         allCoords.push(coords)
         // console.log('im allCoords', allCoords)
-        if (allCoords.length === 69) {
+        if (allCoords.length === 200) {
           fs.writeFile(`${__dirname}/rekt.json`, JSON.stringify(allCoords), (err) => {
             if (err) console.log(err)
             else console.log('all done my G')

@@ -30,7 +30,7 @@ class App extends React.Component {
 
   tickTock (count) {
     this.props.dispatch(getCoords())
-    setTimeout(() => this.tickTock(count + 1), 2000)
+    setTimeout(() => this.tickTock(count + 1), 3000)
   }
 
   componentDidUpdate () {
