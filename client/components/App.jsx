@@ -84,7 +84,7 @@ class App extends React.Component {
           data
         })
       }
-      this.refreshPosition(-41.288889, 174.777222)
+      this.refreshPosition(data.latitude, data.longitude)
     })
   }
   refreshPosition (lat, lng) {
