@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { getCoords } from '../actions/coords'
 import { gimmePic, addPic } from '../actions/pic'
 import { getLatLng, getPosition } from '../apiClient.js'
+// import bigCoords from '../../server/coordLog/rekt.json'
 
 const style = { height: '400px', width: '60%' }
 const coordCount = 1
