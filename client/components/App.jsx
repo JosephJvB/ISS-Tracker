@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { getCoords } from '../actions/coords'
 import { gimmePic, addPic } from '../actions/pic'
 import { getLatLng, getPosition } from '../apiClient.js'
-import bigCoords from '../../server/coordLog/rekt.json'
+// import bigCoords from '../../server/coordLog/rekt.json'
 
 const style = { height: '400px', width: '60%' }
 const coordCount = 1
@@ -27,7 +27,7 @@ class App extends React.Component {
     this.refreshCoords = this.refreshCoords.bind(this)
   }
 
-  componentDidMount () { this.tickTock(coordCount); this.initMap(); console.log('thuh coords', bigCoords) }
+  componentDidMount () { this.tickTock(coordCount); this.initMap() }
 
   tickTock (count) {
     this.props.dispatch(getCoords())
@@ -51,7 +51,7 @@ class App extends React.Component {
     this.iss.setMap(this.map)
 
     const line = new google.maps.Polyline({
-      path: bigCoords,
+      path: coords,
       geodesic: true,
       strokeColor: 'red',
       strokeOpacity: 1.0,
