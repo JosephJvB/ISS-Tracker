@@ -10,9 +10,6 @@
       "restart": false
     }
   },
-  "include": {
-    "I": "./steps_file.js"
-  },
   "bootstrap": false,
   "mocha": {},
   "name": "ISS-Tracker"
