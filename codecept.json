@@ -1,0 +1,19 @@
+{
+  "tests": "./tests/*_test.js",
+  "timeout": 10000,
+  "output": "./output",
+  "helpers": {
+    "webdriverio": {
+      "url": "http://localhost:3000",
+      "browser": "chrome",
+      "show": false,
+      "restart": false
+    }
+  },
+  "include": {
+    "I": "./steps_file.js"
+  },
+  "bootstrap": false,
+  "mocha": {},
+  "name": "ISS-Tracker"
+}
