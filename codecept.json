@@ -3,9 +3,10 @@
   "timeout": 10000,
   "output": "./output",
   "helpers": {
-    "webdriverio": {
-      "url": "http://wheres-my-iss.herokuapp.com/",
-      "browser": "chrome"
+    "Nightmare": {
+      "url": "http://localhost:3000/",
+      "show": true,
+      "restart": false
     }
   },
   "bootstrap": false,
