@@ -4,7 +4,7 @@
   "output": "./output",
   "helpers": {
     "webdriverio": {
-      "url": "http://localhost:3000",
+      "url": "http://wheres-my-iss.herokuapp.com/",
       "browser": "chrome"
     }
   },
