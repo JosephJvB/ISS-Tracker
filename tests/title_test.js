@@ -1,4 +1,3 @@
-
 Feature('title')
 
 Scenario('see title', (I) => {

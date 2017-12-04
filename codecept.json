@@ -5,9 +5,7 @@
   "helpers": {
     "webdriverio": {
       "url": "http://localhost:3000",
-      "browser": "chrome",
-      "show": false,
-      "restart": false
+      "browser": "chrome"
     }
   },
   "bootstrap": false,
