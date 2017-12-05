@@ -23,4 +23,4 @@ Scenario('see pic', I => {
   I.seeElement('#pic')
 })
 
-// i have some serious issue with seeElement huh
+// i have some serious issue with seeElement huh > Yes but for all the wrong reasons - you are dumb
