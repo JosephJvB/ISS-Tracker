@@ -1,4 +1,4 @@
-Feature('info click test')
+Feature('info click tests')
 
 Scenario('see lat value', function * (I) {
   I.click('MORE INFO')

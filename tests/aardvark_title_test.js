@@ -1,4 +1,4 @@
-Feature('title test')
+Feature('title tests')
 
 Scenario('see title', I => {
   I.amOnPage('/')
