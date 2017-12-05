@@ -23,5 +23,9 @@ Scenario('see pic', I => {
   I.seeElement('#pic')
 })
 
+// Scenario('sauce test', I => {
+//   I.seeInSource('idklol')
+// })
+
 // test that if msg is a timezone then img src has wikipedia
 // then if msg is err that img src is dopefish
