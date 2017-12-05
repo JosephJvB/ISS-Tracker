@@ -6,6 +6,7 @@
   "main": "server/index.js",
   "scripts": {
     "puppet": "node server/routes/puppet.js",
+    "fast": "codeceptjs run",
     "it-straight": "node server/coordLog/index.js",
     "start": "webpack && node server",
     "dev": "nodemon --watch server & webpack --watch",
