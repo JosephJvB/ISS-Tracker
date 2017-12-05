@@ -1,11 +1,11 @@
 {
-  "tests": "./tests/*_test.js",
+  "tests": "./tests/nightmare/*_test.js",
   "timeout": 10000,
   "output": "./output",
   "helpers": {
     "Nightmare": {
       "url": "http://localhost:3000/",
-      "show": true,
+      "show": false,
       "restart": false
     }
   },
