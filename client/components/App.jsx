@@ -124,7 +124,7 @@ class App extends React.Component {
         <div className="columns" style={buffer}></div>
         <div className="columns">
           <div className="column is-1"></div>
-          <div className='map' ref='map' style={style}></div>
+          <div className='map' id="map" ref='map' style={style}></div>
           <div className="column card">
             <button className="button" id="info" onClick={this.refreshCoords}>MORE INFO:</button>
             <ul className="has-text-left">
