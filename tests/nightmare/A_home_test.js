@@ -12,3 +12,7 @@ Scenario('see title', I => {
 Scenario('see heading', I => {
   I.see('ISS Tracker')
 })
+
+Scenario('see hr', I => {
+  I.seeElement('hr')
+})
