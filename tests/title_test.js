@@ -1,6 +1,5 @@
-Feature('title')
+Feature('title test')
 
-Scenario('see title', (I) => {
-  I.amOnPage('/')
+Scenario('see title', I => {
   I.see('ISS Tracker')
 })

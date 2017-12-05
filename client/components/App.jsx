@@ -122,15 +122,15 @@ class App extends React.Component {
           <div className="column is-1"></div>
           <div className='map' ref='map' style={style}></div>
           <div className="column card">
-            <button className="button" onClick={this.refreshCoords}>MORE INFO:</button>
+            <button className="button" id="info" onClick={this.refreshCoords}>MORE INFO:</button>
             <ul className="has-text-left">
-              <li><h2>Lat: {lat}</h2></li>
-              <li><h2>Lng: {lng}</h2></li>
-              <li><h3>{errMessage}</h3></li>
-              <li><h3>{location}</h3></li>
+              <li><h2 id="lat">Lat: {lat}</h2></li>
+              <li><h2 id="lng">Lng: {lng}</h2></li>
+              <li><h3 id="err">{errMessage}</h3></li>
+              <li><h3 id="loc">{location}</h3></li>
             </ul>
-            {picExists && <a href={`https://en.wikipedia.org/wiki/${location.split('/')[1]}`}> <img src={`https://${this.props.pic}`} /> </a>}
-            {!picExists && <img src={this.props.pic} />}
+            {picExists && <a href={`https://en.wikipedia.org/wiki/${location.split('/')[1]}`}> <img id="pic" src={`https://${this.props.pic}`} /> </a>}
+            {!picExists && <img id="pic" src={this.props.pic} />}
           </div>
           <div className="column is-1"></div>
         </div>
