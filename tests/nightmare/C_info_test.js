@@ -22,3 +22,6 @@ Scenario('see err|timezone', function * (I) {
 Scenario('see pic', I => {
   I.seeElement('#pic')
 })
+
+// test that if msg is a timezone then img src has wikipedia
+// then if msg is err that img src is dopefish
