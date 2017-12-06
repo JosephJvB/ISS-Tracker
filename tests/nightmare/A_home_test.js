@@ -5,6 +5,10 @@ Scenario('see app', I => {
   I.seeElement('#app')
 })
 
+Scenario('see bulma', I => {
+  I.seeInSource('<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.5.3/css/bulma.css">')
+})
+
 Scenario('see title', I => {
   I.seeInTitle('I.S.S')
 })
@@ -15,4 +19,8 @@ Scenario('see heading', I => {
 
 Scenario('see hr', I => {
   I.seeElement('hr')
+})
+
+Scenario('see bundle.js', I => {
+  I.seeInSource('<script src="bundle.js"></script>')
 })

@@ -19,3 +19,5 @@ async function scrapePic (city) {
 }
 
 module.exports = {scrapePic}
+
+// 'this article has multiple issues' will return a ? book rather than the image. Need to figure a solution for that
