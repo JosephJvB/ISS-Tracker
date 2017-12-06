@@ -11,7 +11,7 @@
     "it-straight": "node server/coordLog/index.js",
     "start": "webpack && node server",
     "dev": "nodemon --watch server & webpack --watch",
-    "test": "tape -r babel-register 'test/**/*.test.js' | tap-diff"
+    "test": "jest"
   },
   "babel": {
     "presets": [
@@ -26,6 +26,7 @@
     "codeceptjs-nightmare": "^1.1.0",
     "codeceptjs-webdriverio": "^1.1.0",
     "enzyme": "^2.7.0",
+    "jest": "^21.2.1",
     "nightmare": "^2.10.0",
     "nightmare-upload": "^0.1.1",
     "selenium-standalone": "^6.11.0",
