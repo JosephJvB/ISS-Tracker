@@ -27,7 +27,7 @@ class App extends React.Component {
     this.getNewCoords = this.getNewCoords.bind(this)
   }
 
-  componentDidMount () { this.tickTock(coordCount); this.initMap(); }
+  componentDidMount () { this.tickTock(coordCount); this.initMap() }
 
   componentDidUpdate () { this.renderLine() }
 
@@ -59,7 +59,7 @@ class App extends React.Component {
 
   initMap () {
     console.log('lol')
-    if (!this.props.coords[0]) return setTimeout(this.initMap, 50)
+    if (!this.props.coords.length) return setTimeout(this.initMap, 50)
     const { lat, lng } = this.props.coords[0]
     this.map = new window.google.maps.Map(this.refs.map, {
       center: { lat, lng },
