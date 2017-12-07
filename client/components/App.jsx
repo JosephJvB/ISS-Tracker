@@ -122,7 +122,7 @@ class App extends React.Component {
               <li><h3 id="err">{errMessage}</h3></li>
               <li><h3 id="loc">{location}</h3></li>
             </ul>
-            {picExists ? <a href={`https://en.wikipedia.org/wiki/${city}`}> <img id="pic" src={`https://${this.props.pic}`} /> </a> : <img id="pic" src={this.props.pic} />}
+            {picExists ? <a href={`https://en.wikipedia.org/wiki/${city}`}> <img className="pic" src={`https://${this.props.pic}`} /> </a> : <img className="pic" src={this.props.pic} />}
           </div>
           <div className="column is-1"></div>
         </div>

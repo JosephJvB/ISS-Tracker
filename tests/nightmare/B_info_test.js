@@ -14,7 +14,7 @@ Scenario('see lng value', function * (I) {
 })
 
 Scenario('see err|timezone', function * (I) {
-  I.wait(6)
+  I.waitForVisible('.pic')
   let tz = yield I.grabTextFrom('#loc')
   let err = yield I.grabTextFrom('#err')
   I.see(tz || err)
@@ -24,6 +24,7 @@ Scenario('see pic', I => {
   I.seeElement('.pic')
 })
 
+// this test is not complete
 Scenario('pic is fish or wiki', function * (I) {
   let pic = yield I.grabAttributeFrom('.pic', 'src')
   I.seeInSource(pic)
