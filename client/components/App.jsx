@@ -14,7 +14,6 @@ class App extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      infoVis: false,
       lat: null,
       lng: null,
       location: null,
@@ -26,16 +25,11 @@ class App extends React.Component {
     this.tickTock = this.tickTock.bind(this)
     this.renderLine = this.renderLine.bind(this)
     this.getNewCoords = this.getNewCoords.bind(this)
-    this.notYet = this.notYet.bind(this)
   }
 
-  componentDidMount () { this.tickTock(coordCount); this.(); setTimeout(this.notYet, 3500) }
+  componentDidMount () { this.tickTock(coordCount); this.initMap(); }
 
   componentDidUpdate () { this.renderLine() }
-
-  notYet () {
-    this.setState({ infoVis: true })
-  }
 
   tickTock (count) {
     this.props.dispatch(getCoords())
@@ -65,8 +59,8 @@ class App extends React.Component {
 
   initMap () {
     console.log('lol')
-    if (!this.props.coords.length) return setTimeout(this.initMap, 50)
-    const { lat, lng } = this.props.coords.shift()
+    if (!this.props.coords[0]) return setTimeout(this.initMap, 50)
+    const { lat, lng } = this.props.coords[0]
     this.map = new window.google.maps.Map(this.refs.map, {
       center: { lat, lng },
       zoom: 2,
@@ -121,7 +115,7 @@ class App extends React.Component {
           <div className="column is-1"></div>
           <div className='map' ref='map' style={style}></div>
           <div className="column card">
-            {this.state.infoVis ? <button className="button" onClick={this.getNewCoords}>MORE INFO:</button> : <button className="button" disabled>MORE INFO:</button>}
+            <button className="button" onClick={this.getNewCoords}>MORE INFO:</button>
             <ul className="has-text-left">
               <li><h2 id="lat">Lat: {lat}</h2></li>
               <li><h2 id="lng">Lng: {lng}</h2></li>
