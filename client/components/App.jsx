@@ -87,13 +87,13 @@ class App extends React.Component {
     getPosition(lat, lng, (err, data) => {
       if (!err) {
         const { timezone_id } = data
-        const newCity = transform(timezone_id)
+        const city = transform(timezone_id)
         this.setState({
+          city,
           location: timezone_id,
-          city: newCity,
           errMessage: null
         })
-        this.props.dispatch(gimmePic(newCity))
+        this.props.dispatch(gimmePic(city))
         this.setState({picExists: true})
       } else {
         this.props.dispatch(addPic('/images/dopefish_lives.gif'))

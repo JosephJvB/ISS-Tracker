@@ -14,13 +14,19 @@ Scenario('see lng value', function * (I) {
 })
 
 Scenario('see err|timezone', function * (I) {
-  I.waitForVisible('#pic')
+  I.wait(6)
   let tz = yield I.grabTextFrom('#loc')
-  I.see(tz || 'Location not specified. (only coordinates on land are supported)')
+  let err = yield I.grabTextFrom('#err')
+  I.see(tz || err)
 })
 
 Scenario('see pic', I => {
-  I.seeElement('#pic')
+  I.seeElement('.pic')
+})
+
+Scenario('pic is fish or wiki', function * (I) {
+  let pic = yield I.grabAttributeFrom('.pic', 'src')
+  I.seeInSource(pic)
 })
 
 // Scenario('sauce test', I => {
@@ -29,3 +35,4 @@ Scenario('see pic', I => {
 
 // test that if msg is a timezone then img src has wikipedia & test that imgClick takes you to wikipedia :)
 // then if msg is err that img src is dopefish
+// test that transform works with all sorts of diff inputs
