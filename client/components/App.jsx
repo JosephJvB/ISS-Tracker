@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { getCoords } from '../actions/coords'
 import { gimmePic, addPic } from '../actions/pic'
 import { getLatLng, getPosition } from '../apiClient.js'
+import { transform } from '../utils'
 // import bigCoords from '../../server/coordLog/rekt.json'
 
 const style = { height: '400px', width: '60%' }
@@ -18,7 +19,8 @@ class App extends React.Component {
       data: null,
       location: null,
       errMessage: null,
-      picExists: false
+      picExists: false,
+      city: null
     }
     this.initMap = this.initMap.bind(this)
     this.tickTock = this.tickTock.bind(this)
@@ -93,11 +95,14 @@ class App extends React.Component {
     getPosition(lat, lng, (err, data) => {
       if (!err) {
         const { timezone_id } = data
+        const cityArr = timezone_id.split('/')
+        const city = cityArr.length === 3 ? transform(cityArr[2]) : transform(cityArr[1])
         this.setState({
           location: timezone_id,
+          city,
           errMessage: null
         })
-        this.props.dispatch(gimmePic(timezone_id))
+        this.props.dispatch(gimmePic(city))
         this.setState({picExists: true})
       } else {
         this.props.dispatch(addPic('/images/dopefish_lives.gif'))
@@ -111,11 +116,7 @@ class App extends React.Component {
   }
 
   render () {
-    let { lat, lng, location, errMessage, picExists } = this.state
-    let city = ''
-    if (location) city = location.split('/')[1]
-    if (city === 'New_York') city = 'New_York_City'
-    if (city === 'Oral') city = 'Oral,_Kazakhstan'
+    let { lat, lng, location, errMessage, picExists, city } = this.state
     const buffer = { height: '40px' }
     return (
       <section className="section has-text-centered">
