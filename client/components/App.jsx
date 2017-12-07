@@ -16,7 +16,6 @@ class App extends React.Component {
     this.state = {
       lat: null,
       lng: null,
-      data: null,
       location: null,
       errMessage: null,
       picExists: false,
@@ -63,8 +62,8 @@ class App extends React.Component {
 
   initMap () {
     console.log('lol')
-    if (!this.props.coords[0]) return setTimeout(this.initMap, 50)
-    const { lat, lng } = this.props.coords[0]
+    if (!this.props.coords.length) return setTimeout(this.initMap, 50)
+    const { lat, lng } = this.props.coords.shift()
     this.map = new window.google.maps.Map(this.refs.map, {
       center: { lat, lng },
       zoom: 2,
@@ -73,16 +72,15 @@ class App extends React.Component {
   }
 
   getNewCoords () {
-    getLatLng((err, data) => {
+    getLatLng((err, d) => {
       if (!err) {
         this.setState({
-          lat: data.latitude,
-          lng: data.longitude,
-          data,
+          lat: d.latitude,
+          lng: d.longitude,
           picExists: false
         })
       }
-      this.getLocInfo(-23.75, -65.5)
+      this.getLocInfo(d.latitude, d.longitude)
     })
   }
   getLocInfo (lat, lng) {
