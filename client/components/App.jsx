@@ -25,8 +25,7 @@ class App extends React.Component {
     this.initMap = this.initMap.bind(this)
     this.tickTock = this.tickTock.bind(this)
     this.renderLine = this.renderLine.bind(this)
-    this.zoomIn = this.zoomIn.bind(this)
-    this.refreshCoords = this.refreshCoords.bind(this)
+    this.getNewCoords = this.getNewCoords.bind(this)
   }
 
   componentDidMount () { this.tickTock(coordCount); this.initMap() }
@@ -73,12 +72,7 @@ class App extends React.Component {
     })
   }
 
-  zoomIn () {
-    this.map.setZoom(7)
-    this.map.setCenter(this.iss.getPosition())
-  }
-
-  refreshCoords () {
+  getNewCoords () {
     getLatLng((err, data) => {
       if (!err) {
         this.setState({
@@ -88,21 +82,20 @@ class App extends React.Component {
           picExists: false
         })
       }
-      this.refreshPosition(data.latitude, data.longitude)
+      this.getLocInfo(-23.75, -65.5)
     })
   }
-  refreshPosition (lat, lng) {
+  getLocInfo (lat, lng) {
     getPosition(lat, lng, (err, data) => {
       if (!err) {
         const { timezone_id } = data
-        const cityArr = timezone_id.split('/')
-        const city = cityArr.length === 3 ? transform(cityArr[2]) : transform(cityArr[1])
+        const newCity = transform(timezone_id)
         this.setState({
           location: timezone_id,
-          city,
+          city: newCity,
           errMessage: null
         })
-        this.props.dispatch(gimmePic(city))
+        this.props.dispatch(gimmePic(newCity))
         this.setState({picExists: true})
       } else {
         this.props.dispatch(addPic('/images/dopefish_lives.gif'))
@@ -127,7 +120,7 @@ class App extends React.Component {
           <div className="column is-1"></div>
           <div className='map' ref='map' style={style}></div>
           <div className="column card">
-            <button className="button" onClick={this.refreshCoords}>MORE INFO:</button>
+            <button className="button" onClick={this.getNewCoords}>MORE INFO:</button>
             <ul className="has-text-left">
               <li><h2 id="lat">Lat: {lat}</h2></li>
               <li><h2 id="lng">Lng: {lng}</h2></li>
