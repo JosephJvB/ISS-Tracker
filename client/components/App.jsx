@@ -14,6 +14,7 @@ class App extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
+      infoVis: false,
       lat: null,
       lng: null,
       location: null,
@@ -25,18 +26,20 @@ class App extends React.Component {
     this.tickTock = this.tickTock.bind(this)
     this.renderLine = this.renderLine.bind(this)
     this.getNewCoords = this.getNewCoords.bind(this)
+    this.notYet = this.notYet.bind(this)
   }
 
-  componentDidMount () { this.tickTock(coordCount); this.initMap() }
+  componentDidMount () { this.tickTock(coordCount); this.(); setTimeout(this.notYet, 3500) }
+
+  componentDidUpdate () { this.renderLine() }
+
+  notYet () {
+    this.setState({ infoVis: true })
+  }
 
   tickTock (count) {
     this.props.dispatch(getCoords())
     setTimeout(() => this.tickTock(count + 1), 3000)
-  }
-
-  componentDidUpdate () {
-    // console.log('coord no. ', this.props.coords.length)
-    this.renderLine()
   }
 
   renderLine () {
@@ -118,7 +121,7 @@ class App extends React.Component {
           <div className="column is-1"></div>
           <div className='map' ref='map' style={style}></div>
           <div className="column card">
-            <button className="button" onClick={this.getNewCoords}>MORE INFO:</button>
+            {this.state.infoVis ? <button className="button" onClick={this.getNewCoords}>MORE INFO:</button> : <button className="button" disabled>MORE INFO:</button>}
             <ul className="has-text-left">
               <li><h2 id="lat">Lat: {lat}</h2></li>
               <li><h2 id="lng">Lng: {lng}</h2></li>
