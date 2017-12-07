@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { getCoords } from '../actions/coords'
 import { gimmePic, addPic } from '../actions/pic'
 import { getLatLng, getPosition } from '../apiClient.js'
+import { transform } from '../utils'
 // import bigCoords from '../../server/coordLog/rekt.json'
 
 const style = { height: '400px', width: '60%' }
@@ -15,28 +16,24 @@ class App extends React.Component {
     this.state = {
       lat: null,
       lng: null,
-      data: null,
       location: null,
       errMessage: null,
-      picExists: false
+      picExists: false,
+      city: null
     }
     this.initMap = this.initMap.bind(this)
     this.tickTock = this.tickTock.bind(this)
     this.renderLine = this.renderLine.bind(this)
-    this.zoomIn = this.zoomIn.bind(this)
-    this.refreshCoords = this.refreshCoords.bind(this)
+    this.getNewCoords = this.getNewCoords.bind(this)
   }
 
   componentDidMount () { this.tickTock(coordCount); this.initMap() }
 
+  componentDidUpdate () { this.renderLine() }
+
   tickTock (count) {
     this.props.dispatch(getCoords())
     setTimeout(() => this.tickTock(count + 1), 3000)
-  }
-
-  componentDidUpdate () {
-    // console.log('coord no. ', this.props.coords.length)
-    this.renderLine()
   }
 
   renderLine () {
@@ -62,7 +59,7 @@ class App extends React.Component {
 
   initMap () {
     console.log('lol')
-    if (!this.props.coords[0]) return setTimeout(this.initMap, 50)
+    if (!this.props.coords.length) return setTimeout(this.initMap, 50)
     const { lat, lng } = this.props.coords[0]
     this.map = new window.google.maps.Map(this.refs.map, {
       center: { lat, lng },
@@ -71,33 +68,29 @@ class App extends React.Component {
     })
   }
 
-  zoomIn () {
-    this.map.setZoom(7)
-    this.map.setCenter(this.iss.getPosition())
-  }
-
-  refreshCoords () {
-    getLatLng((err, data) => {
+  getNewCoords () {
+    getLatLng((err, d) => {
       if (!err) {
         this.setState({
-          lat: data.latitude,
-          lng: data.longitude,
-          data,
+          lat: d.latitude,
+          lng: d.longitude,
           picExists: false
         })
       }
-      this.refreshPosition(data.latitude, data.longitude)
+      this.getLocInfo(d.latitude, d.longitude)
     })
   }
-  refreshPosition (lat, lng) {
+  getLocInfo (lat, lng) {
     getPosition(lat, lng, (err, data) => {
       if (!err) {
         const { timezone_id } = data
+        const city = transform(timezone_id)
         this.setState({
+          city,
           location: timezone_id,
           errMessage: null
         })
-        this.props.dispatch(gimmePic(timezone_id))
+        this.props.dispatch(gimmePic(city))
         this.setState({picExists: true})
       } else {
         this.props.dispatch(addPic('/images/dopefish_lives.gif'))
@@ -111,11 +104,7 @@ class App extends React.Component {
   }
 
   render () {
-    let { lat, lng, location, errMessage, picExists } = this.state
-    let city = ''
-    if (location) city = location.split('/')[1]
-    if (city === 'New_York') city = 'New_York_City'
-    if (city === 'Oral') city = 'Oral,_Kazakhstan'
+    let { lat, lng, location, errMessage, picExists, city } = this.state
     const buffer = { height: '40px' }
     return (
       <section className="section has-text-centered">
@@ -126,14 +115,14 @@ class App extends React.Component {
           <div className="column is-1"></div>
           <div className='map' ref='map' style={style}></div>
           <div className="column card">
-            <button className="button" onClick={this.refreshCoords}>MORE INFO:</button>
+            <button className="button" onClick={this.getNewCoords}>MORE INFO:</button>
             <ul className="has-text-left">
               <li><h2 id="lat">Lat: {lat}</h2></li>
               <li><h2 id="lng">Lng: {lng}</h2></li>
               <li><h3 id="err">{errMessage}</h3></li>
               <li><h3 id="loc">{location}</h3></li>
             </ul>
-            {picExists ? <a href={`https://en.wikipedia.org/wiki/${city}`}> <img id="pic" src={`https://${this.props.pic}`} /> </a> : <img id="pic" src={this.props.pic} />}
+            {picExists ? <a href={`https://en.wikipedia.org/wiki/${city}`}> <img className="pic" src={`https://${this.props.pic}`} /> </a> : <img className="pic" src={this.props.pic} />}
           </div>
           <div className="column is-1"></div>
         </div>
