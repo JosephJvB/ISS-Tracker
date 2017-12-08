@@ -14,4 +14,4 @@ Scenario('see wikipedia on land', function * (I) {
   !src.includes('dopefish') ? I.seeInCurrentUrl('wikipedia') : I.see('Location not specified')
 })
 
-// top test is pretty verbose...
+// top test is pretty verbose...but cant think of better solution atm
