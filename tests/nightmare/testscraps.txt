@@ -1,0 +1,7 @@
+think this test only works at sea
+Scenario('bigtest', function * (I) {
+  let err = yield I.grabTextFrom('#err')
+  let loc = yield I.grabTextFrom('#loc')
+  if (loc) I.seeElement('#wiki')
+  if (err) I.seeElement('#fish')
+})

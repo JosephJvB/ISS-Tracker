@@ -61,6 +61,7 @@ class App extends React.Component {
     console.log('lol')
     if (!this.props.coords.length) return setTimeout(this.initMap, 50)
     const { lat, lng } = this.props.coords[0]
+    console.log(lat, lng)
     this.map = new window.google.maps.Map(this.refs.map, {
       center: { lat, lng },
       zoom: 2,
@@ -122,7 +123,7 @@ class App extends React.Component {
               <li><h3 id="err">{errMessage}</h3></li>
               <li><h3 id="loc">{location}</h3></li>
             </ul>
-            {picExists ? <a href={`https://en.wikipedia.org/wiki/${city}`}> <img className="pic" src={`https://${this.props.pic}`} /> </a> : <img className="pic" src={this.props.pic} />}
+            {picExists ? <a href={`https://en.wikipedia.org/wiki/${city}`}> <img id="wiki" className="pic" src={`https://${this.props.pic}`} /> </a> : <img id="fish" className="pic" src={this.props.pic} />}
           </div>
           <div className="column is-1"></div>
         </div>

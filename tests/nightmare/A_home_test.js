@@ -5,7 +5,7 @@ Scenario('see app', I => {
   I.seeElement('#app')
 })
 
-Scenario('see bulma', I => {
+Scenario('see bulma script', I => {
   I.seeInSource('<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.5.3/css/bulma.css">')
 })
 
