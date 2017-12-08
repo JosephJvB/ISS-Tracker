@@ -20,14 +20,8 @@ Scenario('see err|timezone', function * (I) {
   I.see(tz || err)
 })
 
-Scenario('see pic', I => {
+Scenario('see a pic', I => {
   I.seeElement('.pic')
-})
-
-// this test is not complete
-Scenario('pic is fish or wiki', function * (I) {
-  let pic = yield I.grabAttributeFrom('.pic', 'src')
-  I.seeInSource(pic)
 })
 
 // Scenario('sauce test', I => {

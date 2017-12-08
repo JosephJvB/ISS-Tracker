@@ -1,5 +1,4 @@
 function transform (location) {
-  console.log('loc', location)
   const cityArr = location.split('/')
   const city = cityArr.length === 3 ? cityArr[2] : cityArr[1]
   switch (city) {

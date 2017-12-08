@@ -12,3 +12,5 @@ test('<App />', t => {
   </Provider >)
   expect(wrapper.text().toBe(expected))
 })
+
+// this test fails
