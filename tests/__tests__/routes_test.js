@@ -14,10 +14,12 @@ describe('test ISS API', () => {
   })
 })
 
+// test below doesnt test scrape, just route
+
 describe('test pic route', () => {
   test('puppeteer will respond with a pic', async () => {
     const response = await request(server)
-      .get('/api/v1/picScrape/Dakar')
+      .get('/api/v1/picScrape/test')
     expect(response.statusCode).toBe(200)
   })
 })
