@@ -5,13 +5,14 @@
   "repository": "https://github.com/dev-academy-challenges/boilerplate-react-webpack.git",
   "main": "server/index.js",
   "scripts": {
+    "testScrape": "node tests/testScrape.js",
     "clean": "git clean -f output/*.png",
     "puppet": "node server/routes/puppet.js",
     "fast": "codeceptjs run",
     "it-straight": "node server/coordLog/index.js",
     "start": "webpack && node server",
     "dev": "nodemon --watch server & webpack --watch",
-    "test": "jest"
+    "test": "jest & npm run fast"
   },
   "babel": {
     "presets": [
