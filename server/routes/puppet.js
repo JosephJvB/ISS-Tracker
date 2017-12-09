@@ -11,7 +11,7 @@ async function scrapePic (city) {
   })
 
   browser.close()
-  console.log('pic: ', pic)
+  // console.log('pic: ', pic)
   return pic
 }
 
