@@ -109,7 +109,9 @@ class App extends React.Component {
     const buffer = { height: '40px' }
     return (
       <section className="section has-text-centered">
-        <h1 className="title is-1">ISS Tracker</h1>
+        <div className="columns">
+          <img src="/images/sCarmenL.png" /><h1 className="title is-1 has-text-justified">ISS Tracker</h1><img src="/images/sCarmenR.png" />
+        </div>
         <hr />
         <div className="columns" style={buffer}></div>
         <div className="columns">

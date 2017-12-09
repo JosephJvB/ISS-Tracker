@@ -5,3 +5,30 @@ Scenario('bigtest', function * (I) {
   if (loc) I.seeElement('#wiki')
   if (err) I.seeElement('#fish')
 })
+
+describe('test pic route', () => {
+  test('puppeteer will respond with a pic', (done) => {
+    request(server).get('/api/v1/picScrape/Dakar')
+      .then(res => {
+        expect(response.text).toBe('upload.wikimedia.org/wikipedia/commons/thumb/4/46/Dakar-Indépendance.jpg/250px-Dakar-Indépendance.jpg')
+        done()
+      })
+  })
+})
+
+import React from 'react'
+import { mount } from 'enzyme'
+import { Provider } from 'react-redux'
+
+import { store } from '../../client/store'
+import App from '../../client/components/App'
+
+test('<App />', t => {
+  const expected = 'ISS Tracker'
+  const wrapper = mount(<Provider store={store} >
+    <App />
+  </Provider >)
+  expect(wrapper.text().toBe(expected))
+})
+
+// this test fails
