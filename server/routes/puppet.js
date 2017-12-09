@@ -6,7 +6,8 @@ async function scrapePic (city) {
   await page.goto(`https://en.wikipedia.org/wiki/${city}`)
 
   const pic = await page.evaluate(() => {
-    const sauce = document.body.querySelector('a.image').innerHTML.split('src="//')[1].split('" ')[0]
+    let sauce = document.body.querySelector('a.image').innerHTML.split('src="//')[1].split('" ')[0]
+    // if(sauce === 'book pic url') return second('a.image')
     return sauce
   })
 
@@ -17,4 +18,4 @@ async function scrapePic (city) {
 
 module.exports = {scrapePic}
 
-// 'this article has multiple issues' will return a ? book rather than the image. Need to figure a solution for that
+// stop returning the book pic! started some pseudocode
