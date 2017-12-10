@@ -34,7 +34,7 @@ test('<App />', t => {
 // this test fails
 
 index - testScrape
-function getPics () {
+function getPics (pics) {
   fs.readFile(`${__dirname}/../../tests/testScrape/picLibrary.json`, 'utf8', (err, data) => {
     if (err) console.log(err)
     else JSON.parse(data)
