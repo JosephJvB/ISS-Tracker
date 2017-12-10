@@ -8,7 +8,7 @@ const cityArr = ['Dakar', 'New_York_City', 'Oral,_Kazakhstan', 'Santa_Isabel_Isl
 testScrape(cityArr)
 
 function testScrape (citys) {
-  fs.readFile(`${__dirname}/../../tests/testScrape/picLibrary.json`, 'utf8', (err, data) => {
+  fs.readFile(`${__dirname}/picLibrary.json`, 'utf8', (err, data) => {
     if (err) console.log(err)
     else {
       let pics = JSON.parse(data)
@@ -20,7 +20,7 @@ function testScrape (citys) {
         .then(res => {
           const picExist = pics.find(p => p === res)
           if (!picExist) pics.push(res)
-          fs.writeFile(path.join(__dirname, '../../tests/testScrape/picLibrary.json'), JSON.stringify(pics), (err) => {
+          fs.writeFile(path.join(__dirname, '/picLibrary.json'), JSON.stringify(pics), (err) => {
             if (err) console.log(err)
             else console.log('pic: ', res)
           })

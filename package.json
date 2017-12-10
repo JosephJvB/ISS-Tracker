@@ -12,7 +12,7 @@
     "it-straight": "node server/coordLog/index.js",
     "start": "webpack && node server",
     "dev": "nodemon --watch server & webpack --watch",
-    "test": "jest & npm run fast"
+    "test": "jest"
   },
   "babel": {
     "presets": [
