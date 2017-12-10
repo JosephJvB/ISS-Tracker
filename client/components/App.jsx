@@ -86,13 +86,13 @@ class App extends React.Component {
       if (!err) {
         const { timezone_id } = data
         const city = transform(timezone_id)
+        if (city !== this.state.city) this.props.dispatch(gimmePic(city))
         this.setState({
           city,
           location: timezone_id,
-          errMessage: null
+          errMessage: null,
+          picExists: true
         })
-        this.props.dispatch(gimmePic(city))
-        this.setState({picExists: true})
       } else {
         this.props.dispatch(addPic('/images/dopefish_lives.gif'))
         this.setState({

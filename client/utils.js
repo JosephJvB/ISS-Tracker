@@ -9,6 +9,7 @@ function transform (location) {
     case 'Santarem': return 'Santarém,_Pará'
     case 'Jujuy': return 'Jujuy_Province'
     case 'Cordoba': return 'Córdoba,_Argentina'
+    case 'Hovd': return 'Khovd_(city)'
     default:
       return city
   }
