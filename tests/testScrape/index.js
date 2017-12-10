@@ -2,18 +2,17 @@ const fs = require('fs')
 const path = require('path')
 
 const puppet = require('../../server/routes/puppet')
+const { cityArr } = require('../cityList')
 
-const cityArr = ['Dakar', 'New_York_City', 'Oral,_Kazakhstan', 'Santa_Isabel_Island', 'Pheonix,_Arizona', 'Santarém,_Pará', 'Jujuy_Province', 'Córdoba,_Argentina', 'Auckland', 'Tripoli', 'Wellington', 'Ürümqi', 'Shanghai', 'Taipei', 'Paris', 'London', 'Madrid', 'Manchester', 'Moscow', 'Brisbane', 'Los_Angeles', 'San_Fransisco', 'Seattle', 'Melbourne', 'Ho_Chi_Minh_City', 'Tokyo', 'Sapporo', 'Brussels', 'Berlin', 'Oslo', 'Reykjavík', 'The_Hague', 'Amsterdam', 'Rotterdam', 'Malmo', 'Durban', 'Dubai', 'Turkmenistan', 'Tehran', 'Hong_Kong', 'Brasília', 'São_Paulo', 'Seoul']
+testScrape()
 
-testScrape(cityArr)
-
-function testScrape (citys) {
+function testScrape () {
   fs.readFile(`${__dirname}/picLibrary.json`, 'utf8', (err, data) => {
     if (err) console.log(err)
     else {
       let pics = JSON.parse(data)
-      const randNum = Math.floor(Math.random() * citys.length)
-      const city = citys[randNum]
+      const randNum = Math.floor(Math.random() * cityArr.length)
+      const city = cityArr[randNum]
       console.log('searching wikipedia for ' + city)
       setTimeout(() => console.log('please wait'), 1000)
       puppet.scrapePic(city)
@@ -22,7 +21,7 @@ function testScrape (citys) {
           if (!picExist) pics.push(res)
           fs.writeFile(path.join(__dirname, '/picLibrary.json'), JSON.stringify(pics), (err) => {
             if (err) console.log(err)
-            else console.log('pic: ', res)
+            else console.log('saved ' + city + ' pic to library')
           })
         })
     }

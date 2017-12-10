@@ -1,0 +1,3 @@
+const cityArr = ['Dakar', 'New_York_City', 'Nairobi', 'Dar_es_Salaam', 'Addis_Ababa', 'Mogadishu', 'Oral,_Kazakhstan', 'Santa_Isabel_Island', 'Pheonix,_Arizona', 'Santarém,_Pará', 'Jujuy_Province', 'Córdoba,_Argentina', 'Auckland', 'Tripoli', 'Wellington', 'Ürümqi', 'Shanghai', 'Taipei', 'Paris', 'London', 'Madrid', 'Manchester', 'Moscow', 'Brisbane', 'Los_Angeles', 'San_Fransisco', 'Seattle', 'Melbourne', 'Ho_Chi_Minh_City', 'Tokyo', 'Sapporo', 'Brussels', 'Berlin', 'Oslo', 'Reykjavík', 'The_Hague', 'Amsterdam', 'Rotterdam', 'Malmo', 'Durban', 'Dubai', 'Turkmenistan', 'Tehran', 'Hong_Kong', 'Brasília', 'São_Paulo', 'Seoul']
+
+module.exports = { cityArr }
