@@ -15,7 +15,10 @@ async function scrapePic (city, test) {
   })
 
   browser.close()
-  if (test) return console.log('pic: ', pic)
+
+  if (test) {
+    return console.log('pic: ', pic)
+  }
   return pic
 }
 

@@ -5,7 +5,7 @@
   "repository": "https://github.com/dev-academy-challenges/boilerplate-react-webpack.git",
   "main": "server/index.js",
   "scripts": {
-    "testScrape": "node tests/testScrape.js",
+    "testScrape": "node tests/testScrape",
     "clean": "git clean -f output/*.png",
     "puppet": "node server/routes/puppet.js",
     "fast": "codeceptjs run",

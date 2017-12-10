@@ -32,3 +32,18 @@ test('<App />', t => {
 })
 
 // this test fails
+
+index - testScrape
+function getPics () {
+  fs.readFile(`${__dirname}/../../tests/testScrape/picLibrary.json`, 'utf8', (err, data) => {
+    if (err) console.log(err)
+    else JSON.parse(data)
+  })
+}
+
+puppeteer
+ pics.push(pic)
+    fs.writeFile(path.join(__dirname, '../../tests/testScrape/picLibrary.json'), JSON.stringify(pics), (err) => {
+      if (err) console.log(err)
+      else console.log('src no. ' + (pics.length))
+    })
