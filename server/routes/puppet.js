@@ -2,7 +2,7 @@ const puppeteer = require('puppeteer')
 
 const bookSrc = 'upload.wikimedia.org/wikipedia/en/thumb/9/99/Question_book-new.svg/50px-Question_book-new.svg.png'
 
-async function scrapePic (city, test) {
+async function scrapePic (city) {
   if (city === 'test') return 'great job'
   const browser = await puppeteer.launch()
   const page = await browser.newPage()
@@ -15,10 +15,6 @@ async function scrapePic (city, test) {
   })
 
   browser.close()
-
-  if (test) {
-    return console.log('pic: ', pic)
-  }
   return pic
 }
 
