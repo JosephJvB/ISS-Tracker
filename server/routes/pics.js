@@ -7,7 +7,7 @@ const router = express.Router()
 
 router.use(bodyParser.json())
 
-router.get('/picScrape/:city', (req, res) => {
+router.get('/:city', (req, res) => {
   puppet.scrapePic(req.params.city)
     .then(picSrc => {
       res.send(picSrc)

@@ -31,6 +31,7 @@
     "nightmare": "^2.10.0",
     "nightmare-upload": "^0.1.1",
     "selenium-standalone": "^6.11.0",
+    "sqlite3": "^3.1.13",
     "supertest": "^3.0.0",
     "tap-diff": "^0.1.1",
     "tape": "^4.6.3"
@@ -44,6 +45,7 @@
     "body-parser": "^1.15.2",
     "express": "^4.14.0",
     "jsx-loader": "^0.13.2",
+    "knex": "^0.14.2",
     "nodemon": "^1.11.0",
     "puppeteer": "^0.13.0",
     "react": "^15.4.2",

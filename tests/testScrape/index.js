@@ -18,15 +18,18 @@ function testScrape () {
       puppet.scrapePic(city)
         .then(res => {
           const picExist = pics.find(p => p === res)
-          if (!picExist) pics.push(res)
+          if (!picExist) {
+            pics.push(res); console.log('saved ' + city + ' pic to library')
+          } else {
+            console.log('already got that pokemon')
+          }
           fs.writeFile(path.join(__dirname, '/picLibrary.json'), JSON.stringify(pics), (err) => {
             if (err) console.log(err)
-            else console.log('saved ' + city + ' pic to library')
           })
         })
     }
   })
 }
-
+// i think this is an instance of function-hoisting...Also there is a refactor job here :)
 // maybe have a way to ask the user whether the test passed or not - if Y it prints a tick, if N it prints a cross :)
 // Moscow seems to break... LOL
