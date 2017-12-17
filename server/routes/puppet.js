@@ -4,7 +4,9 @@ const bookSrc = 'upload.wikimedia.org/wikipedia/en/thumb/9/99/Question_book-new.
 
 async function scrapePic (city) {
   if (city === 'test') return 'great job'
-  const browser = await puppeteer.launch()
+  const browser = await puppeteer.launch({
+    args: ['--no-sandbox', '--disable-setuid-sandbox']
+  })
   const page = await browser.newPage()
   await page.goto(`https://en.wikipedia.org/wiki/${city}`)
 
