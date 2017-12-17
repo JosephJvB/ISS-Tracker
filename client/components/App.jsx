@@ -78,7 +78,7 @@ class App extends React.Component {
           picExists: false
         })
       }
-      this.getLocInfo(d.latitude, d.longitude)
+      this.getLocInfo(14.692778, -17.446667)
     })
   }
   getLocInfo (lat, lng) {
